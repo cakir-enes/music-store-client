@@ -8,6 +8,9 @@ export default {
     registerPassword: null,
     token: null,
     registerError: null,
+    loginUsername: null,
+    loginPassword: null,
+    loginError: null,
   },
   actions: {
     register({ commit, state }) {
@@ -23,6 +26,21 @@ export default {
         })
         .catch(() => {
           commit('setRegisterError', 'An error has occured trying to create your account.');
+        });
+    },
+    login({ commit, state }) {
+      commit('setLoginError', null);
+
+      return HTTP().post('/auth/login', {
+        username: state.loginUsername,
+        password: state.loginPassword,
+      })
+        .then(({ data }) => {
+          commit('setToken', data.token);
+          router.push('/');
+        })
+        .catch(() => {
+          commit('setLoginError', 'An error has occured trying to login your account.');
         });
     },
     logout({ commit }) {
@@ -47,6 +65,15 @@ export default {
     },
     setRegisterPassword(state, password) {
       state.registerPassword = password;
+    },
+    setLoginError(state, error) {
+      state.loginError = error;
+    },
+    setLoginUsername(state, username) {
+      state.loginUsername = username;
+    },
+    setLoginPassword(state, password) {
+      state.loginPassword = password;
     },
   },
 };

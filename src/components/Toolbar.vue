@@ -9,8 +9,8 @@
       <v-btn flat to="/register" v-if="!isLogggedIn">
         <v-icon class="mr-2">account_box</v-icon>Register
       </v-btn>
-      <v-btn flat v-if="!isLogggedIn">
-        <v-icon class="mr-2">fingerprint</v-icon>Login
+      <v-btn flat v-if="!isLogggedIn" to="/login">
+        <v-icon class="mr-2">account_box</v-icon>Login
       </v-btn>
       <v-btn flat v-if="isLogggedIn" @click="logout">
         <v-icon class="mr-2">exit_to_app</v-icon>Logout
