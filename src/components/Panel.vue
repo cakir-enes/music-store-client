@@ -18,7 +18,7 @@
       <v-card-actions>
         <v-btn flat>ADD TO CART</v-btn>
         <v-spacer></v-spacer>
-        <v-btn flat>DETAILS</v-btn>
+        <v-btn flat @click="viewAlbum()">DETAILS</v-btn>
       </v-card-actions>
     </v-card>
   </div>
@@ -34,7 +34,7 @@ export default {
   },
   methods: {
     viewAlbum() {
-      console.log(`Name: ${title} Id: ${id}`);
+      console.log(`Name: ${this.title} Id: ${this.id}`);
     }
   }
 };
