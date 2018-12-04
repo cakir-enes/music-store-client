@@ -24,10 +24,20 @@
       </v-layout>
       <v-divider light></v-divider>
       <v-card-actions>
-        <v-btn>
-          <v-icon>add_shopping_cart</v-icon>
-          ADD TO CART {{album.price}}
-        </v-btn>
+        <div>
+          <v-btn @click="dialog = !isLoggedIn">
+            <v-icon>add_shopping_cart</v-icon>
+            Add to Cart {{album.price}}
+          </v-btn>
+          <v-dialog v-model="dialog" max-width="290">
+            <v-card>
+              <v-card-title class="headline">Login First</v-card-title>
+              <v-card-text>
+                <v-btn @click="dialog = false">OK</v-btn>
+              </v-card-text>
+            </v-card>
+          </v-dialog>
+        </div>
         <v-spacer></v-spacer>
         <v-btn class="mr-1" @click="viewAlbum()">DETAILS</v-btn>
       </v-card-actions>
@@ -36,9 +46,19 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   props: {
     album: null
+  },
+  computed: {
+    ...mapGetters("auth", ["isLoggedIn"])
+  },
+  data() {
+    return {
+      dialog: false,
+      clicked: false
+    };
   },
   methods: {
     viewAlbum() {
@@ -51,14 +71,3 @@ export default {
 
 <style>
 </style>
-
-
-
-
-
-
-INSERT INTO album (id, "name", "genre", "price", "date", "length", "artistId", "coverUrl") VALUES (DEFAULT,'Mirage','Progressive Rock', 60, 1974, 38.22,(SELECT id FROM artist WHERE name='Camel'),'https://upload.wikimedia.org/wikipedia/en/8/89/Camel-Mirage.jpg');
-INSERT INTO album (id, "name", "genre", "price", "date", "length", "artistId", "coverUrl") VALUES (DEFAULT,'Stationary Traveller','Progressive Rock', 60, 1984, 38.22,(SELECT id FROM artist WHERE name='Camel'),'https://upload.wikimedia.org/wikipedia/en/e/e6/Camel-StationaryTraveller.jpg');
-INSERT INTO album (id, "name", "genre", "price", "date", "length", "artistId", "coverUrl") VALUES (DEFAULT,'Ocean','Progressive Rock', 60, 1977, 43.53,(SELECT id FROM artist WHERE name='Eloy'),'https://upload.wikimedia.org/wikipedia/en/b/ba/Eloy_Ocean.jpg');
-INSERT INTO album (id, "name", "genre", "price", "date", "length", "artistId", "coverUrl") VALUES (DEFAULT,'Aqualung','Progressive Rock', 60, 1971, 41.39,(SELECT id FROM artist WHERE name='Jethro  Tull'),'https://upload.wikimedia.org/wikipedia/en/1/19/JethroTullAqualungalbumcover.jpg');
-INSERT INTO album (id, "name", "genre", "price", "date", "length", "artistId", "coverUrl") VALUES (DEFAULT,'Moving Pictures','Progressive Rock', 60, 1981, 40,(SELECT "id" FROM artist WHERE name='Rush'),'https://upload.wikimedia.org/wikipedia/en/4/4a/Moving_Pictures.jpg');

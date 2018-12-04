@@ -49,7 +49,7 @@ export default {
     },
   },
   getters: {
-    isLogggedIn(state) {
+    isLoggedIn(state) {
       return !!state.token;
     },
   },

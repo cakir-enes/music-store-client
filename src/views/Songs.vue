@@ -20,7 +20,8 @@
         <v-list-tile>
           <v-list-tile-content>
             <v-btn>
-              <v-icon>add_shopping_cart</v-icon>ADD TO CART
+              <v-icon>add_shopping_cart</v-icon>
+              ADD TO CART {{this.albumPrice}}
             </v-btn>
           </v-list-tile-content>
           {{this.albumLen}}
@@ -40,7 +41,8 @@ export default {
       songs: [],
       artist: "",
       albumName: null,
-      albumLen: 0
+      albumLen: 0,
+      albumPrice: null
     };
   },
   beforeMount() {
@@ -54,6 +56,7 @@ export default {
           this.songs = resp.data.songs;
           this.artist = resp.data.artist;
           this.albumName = resp.data.name;
+          this.albumPrice = resp.data.price;
           this.albumLen = resp.data.length;
         })
         .catch(e => console.log(e));
