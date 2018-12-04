@@ -14,7 +14,7 @@
         </v-flex>
         <v-flex xs5>
           <v-img
-            src="https://cdn.vuetifyjs.com/images/cards/halcyon.png"
+            v-bind:src="this.album.coverUrl"
             height="125px"
             contain
             position="right"
@@ -51,3 +51,14 @@ export default {
 
 <style>
 </style>
+
+
+
+
+
+
+INSERT INTO album (id, "name", "genre", "price", "date", "length", "artistId", "coverUrl") VALUES (DEFAULT,'Mirage','Progressive Rock', 60, 1974, 38.22,(SELECT id FROM artist WHERE name='Camel'),'https://upload.wikimedia.org/wikipedia/en/8/89/Camel-Mirage.jpg');
+INSERT INTO album (id, "name", "genre", "price", "date", "length", "artistId", "coverUrl") VALUES (DEFAULT,'Stationary Traveller','Progressive Rock', 60, 1984, 38.22,(SELECT id FROM artist WHERE name='Camel'),'https://upload.wikimedia.org/wikipedia/en/e/e6/Camel-StationaryTraveller.jpg');
+INSERT INTO album (id, "name", "genre", "price", "date", "length", "artistId", "coverUrl") VALUES (DEFAULT,'Ocean','Progressive Rock', 60, 1977, 43.53,(SELECT id FROM artist WHERE name='Eloy'),'https://upload.wikimedia.org/wikipedia/en/b/ba/Eloy_Ocean.jpg');
+INSERT INTO album (id, "name", "genre", "price", "date", "length", "artistId", "coverUrl") VALUES (DEFAULT,'Aqualung','Progressive Rock', 60, 1971, 41.39,(SELECT id FROM artist WHERE name='Jethro  Tull'),'https://upload.wikimedia.org/wikipedia/en/1/19/JethroTullAqualungalbumcover.jpg');
+INSERT INTO album (id, "name", "genre", "price", "date", "length", "artistId", "coverUrl") VALUES (DEFAULT,'Moving Pictures','Progressive Rock', 60, 1981, 40,(SELECT "id" FROM artist WHERE name='Rush'),'https://upload.wikimedia.org/wikipedia/en/4/4a/Moving_Pictures.jpg');

@@ -10,17 +10,17 @@ function process(resp) {
 
   for (const artist of resp.data) {
     for (const [j, val] of artist.albums.entries()) {
-      if (j % 4 === 0) {
+      val.artist = artist.name;
+      batch.push(val);
+      if (batch.length % 3 === 0) {
         albums.push(batch);
         batch = [];
       }
-      val.artist = artist.name;
-      batch.push(val);
     }
-    if (batch.length > 0) {
-      albums.push(batch);
-      batch = [];
-    }
+  }
+  if (batch.length > 0) {
+    albums.push(batch);
+    batch = [];
   }
   console.log(albums);
   return albums;
