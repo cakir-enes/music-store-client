@@ -25,7 +25,7 @@
       <v-divider light></v-divider>
       <v-card-actions>
         <div>
-          <v-btn @click="dialog = !isLoggedIn">
+          <v-btn v-on:click="() => {dialog = !isLoggedIn; if(isLoggedIn) addItem(album) }">
             <v-icon>add_shopping_cart</v-icon>
             Add to Cart {{album.price}}
           </v-btn>
@@ -46,7 +46,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 export default {
   props: {
     album: null
@@ -61,10 +61,12 @@ export default {
     };
   },
   methods: {
+    ...mapActions("cart", ["addItem"]),
     viewAlbum() {
       this.$router.push(`/albums/${this.album.id}`);
       // this.$router.push("/register");
-    }
+    },
+    checkAndAdd() {}
   }
 };
 </script>

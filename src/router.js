@@ -4,7 +4,7 @@ import Albums from './views/Albums.vue';
 import Register from './views/Register.vue';
 import Login from './views/Login.vue';
 import Songs from './views/Songs.vue';
-
+import Cart from './views/Cart.vue';
 
 Vue.use(Router);
 
@@ -20,6 +20,12 @@ export default new Router({
       name: 'songs',
       component: Songs,
     },
+    {
+      path: '/cart',
+      name: 'cart',
+      component: Cart,
+    },
+
     {
       path: '/about',
       name: 'about',

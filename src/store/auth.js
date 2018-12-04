@@ -7,6 +7,7 @@ export default {
     registerUsername: null,
     registerPassword: null,
     token: null,
+    userId: null,
     registerError: null,
     loginUsername: null,
     loginPassword: null,
@@ -22,6 +23,7 @@ export default {
       })
         .then(({ data }) => {
           commit('setToken', data.token);
+          commit('setUserId', data.id);
           router.push('/');
         })
         .catch(() => {
@@ -37,6 +39,7 @@ export default {
       })
         .then(({ data }) => {
           commit('setToken', data.token);
+          commit('setUserId', data.id);
           router.push('/');
         })
         .catch(() => {
@@ -45,12 +48,16 @@ export default {
     },
     logout({ commit }) {
       commit('setToken', null);
+      this.dispatch('cart/resetCart', {}, { root: true });
       router.push('/login');
     },
   },
   getters: {
     isLoggedIn(state) {
       return !!state.token;
+    },
+    getUserId(state) {
+      return state.userId;
     },
   },
   mutations: {
@@ -74,6 +81,9 @@ export default {
     },
     setLoginPassword(state, password) {
       state.loginPassword = password;
+    },
+    setUserId(state, id) {
+      state.userId = id;
     },
   },
 };

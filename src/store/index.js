@@ -4,7 +4,7 @@ import Vuex from 'vuex';
 
 import auth from './auth';
 import albums from './albums';
-
+import cart from './cart';
 
 Vue.use(Vuex);
 
@@ -14,7 +14,7 @@ export default new Vuex.Store({
     baseUrl: '/api',
   },
   modules: {
-    auth, albums,
+    auth, albums, cart,
   },
   mutations: {},
   actions: {},
