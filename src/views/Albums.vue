@@ -2,12 +2,7 @@
   <v-container grid-list-xl>
     <v-layout align-center justify-center row v-for="(batch, idx) in albums" :key="idx">
       <v-flex v-for="album in batch" :key="album.id">
-        <Panel
-          v-bind:title="album.name"
-          v-bind:artist="album.artist"
-          v-bind:year="album.date"
-          v-bind:id="album.id"
-        ></Panel>
+        <Panel v-bind:album="album"></Panel>
       </v-flex>
     </v-layout>
   </v-container>

@@ -1,44 +1,63 @@
 <template>
-  <v-container>
-    <v-layout row wrap>
-      <v-flex xs6 offset-xs3>
-        <div>
-          <h1>Songs</h1>
-          <v-text-field
-            label="Username"
-            placeholder="$route.params.id"
-            :value="loginUsername"
-            @input="setLoginUsername"
-          ></v-text-field>
-
-          <v-text-field
-            label="Password"
-            placeholder="Password"
-            type="password"
-            autocomplete="new-password"
-            :value="loginPassword"
-            @input="setLoginPassword"
-          ></v-text-field>
-          <v-alert type="error" :value="loginError">{{loginError}}</v-alert>
-          <v-btn @click="login">
-            <v-icon class="mr-2">fingerprint</v-icon>Login
-          </v-btn>
-        </div>
-      </v-flex>
-    </v-layout>
-  </v-container>
+  <v-layout row class="pt-4">
+    <v-flex xs12 sm6 offset-sm3>
+      <v-card>
+        <v-toolbar color="black" dark>
+          <v-toolbar-title>Songs</v-toolbar-title>
+          <v-subheader>
+            {{this.albumName}}-
+            <small>{{this.artist.name}}</small>
+          </v-subheader>
+          <v-spacer></v-spacer>
+        </v-toolbar>
+        <v-list>
+          <v-list-tile v-for="song in songs" :key="song.id">
+            <v-list-tile-title v-text="song.name"></v-list-tile-title>
+            {{song.length}}m
+          </v-list-tile>
+        </v-list>
+        <v-divider></v-divider>
+        <v-list-tile>
+          <v-list-tile-content>
+            <v-btn>
+              <v-icon>add_shopping_cart</v-icon>ADD TO CART
+            </v-btn>
+          </v-list-tile-content>
+          {{this.albumLen}}
+        </v-list-tile>
+      </v-card>
+    </v-flex>
+  </v-layout>
 </template>
 
 <script>
-import { mapState, mapMutations, mapActions } from "vuex";
+import router from "../router";
+import HTTP from "../http";
 
 export default {
-  computed: {
-    ...mapState("auth", ["loginUsername", "loginPassword", "loginError"])
+  data() {
+    return {
+      songs: [],
+      artist: "",
+      albumName: null,
+      albumLen: 0
+    };
+  },
+  beforeMount() {
+    this.fetchSongs();
   },
   methods: {
-    ...mapMutations("auth", ["setLoginUsername", "setLoginPassword"]),
-    ...mapActions("auth", ["login"])
+    fetchSongs() {
+      HTTP()
+        .get(`/albums/${this.$route.params.id}`)
+        .then(resp => {
+          this.songs = resp.data.songs;
+          this.artist = resp.data.artist;
+          this.albumName = resp.data.name;
+          this.albumLen = resp.data.length;
+        })
+        .catch(e => console.log(e));
+    }
   }
 };
 </script>

@@ -3,6 +3,8 @@ import Router from 'vue-router';
 import Albums from './views/Albums.vue';
 import Register from './views/Register.vue';
 import Login from './views/Login.vue';
+import Songs from './views/Songs.vue';
+
 
 Vue.use(Router);
 
@@ -12,6 +14,11 @@ export default new Router({
       path: '/',
       name: 'albums',
       component: Albums,
+    },
+    {
+      path: '/albums/:id',
+      name: 'songs',
+      component: Songs,
     },
     {
       path: '/about',
