@@ -3,6 +3,7 @@
     <v-toolbar-title class="mr-4">Music Store</v-toolbar-title>
     <v-toolbar-items>
       <v-btn flat to="/">Albums</v-btn>
+      <v-btn v-if="isLoggedIn" flat to="/history">Order History</v-btn>
     </v-toolbar-items>
     <v-spacer></v-spacer>
     <v-toolbar-items class="hidden-sm-and-down">
