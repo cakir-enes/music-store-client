@@ -7,14 +7,16 @@
           <v-spacer></v-spacer>
         </v-toolbar>
         <v-list>
-          <v-list-tile v-for="order in this.orders" :key="order.id">
-            <v-list-tile-title v-text="order.created.substr(0, 10)"></v-list-tile-title>
+          <div v-for="order in this.orders" :key="order.id"> 
+          <v-list-tile @click='goToDetails(order.id)'>
+            <v-list-tile-title  v-text="order.created.substr(0, 10)"></v-list-tile-title>
             {{order.totalPrice}}
           </v-list-tile>
+            </div>
         </v-list>
         <v-divider></v-divider>
         <v-list-tile>
-            Total: ${{orders.reduce((acc, ord) => acc + Number(ord.totalPrice.replace('$','')), 0)}}
+            Total: ${{this.orders.reduce((acc, ord) => acc + Number(ord.totalPrice.replace('$','')), 0)}}
         </v-list-tile>
       </v-card>
     </v-flex>
@@ -33,12 +35,12 @@ export default {
   },
   data() {
     return {
-      orders: null
+      orders: []
     };
   },
-  mounted() {
+  beforeMount() {
     this.getOrderHistory(this.getUserId)
-    // console.log(this.orders);
+    console.log(this.orders);
   },
   methods: {
       getOrderHistory(userId) {
@@ -47,6 +49,9 @@ export default {
           .then((resp) => this.orders = resp.data.orders)
           .catch(e => console.log(e));
       },
+      goToDetails(id) {
+        router.push('/history/'+ id);
+      }
   }
 };
 </script>

@@ -6,7 +6,7 @@ import Login from './views/Login.vue';
 import Songs from './views/Songs.vue';
 import Cart from './views/Cart.vue';
 import OrderHistory from './views/OrderHistory.vue';
-
+import OrderDetails from './views/OrderDetails.vue';
 Vue.use(Router);
 
 export default new Router({
@@ -40,6 +40,11 @@ export default new Router({
       path: '/history',
       name: 'history',
       component: OrderHistory,
+    },
+    {
+      path: '/history/:id',
+      name: 'orderDetails',
+      component: OrderDetails,
     },
   ],
 });
